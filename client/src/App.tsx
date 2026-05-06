@@ -87,7 +87,7 @@ export default function App() {
       {/* Sidebar */}
       <div style={S.sidebar}>
         <div style={S.sideLabel}>Linux Commands</div>
-        <div style={S.sideTitle}>tl;dr</div>
+        <div style={S.sideTitle}>tl;dr</div>g
         <div style={S.sideDesc}>Offline command reference for sysadmins. Search or click a command.</div>
         <div style={{ marginTop: '0.5rem' }}>
           <input ref={inputRef} onChange={onInput} autoFocus placeholder="Search a command…" style={S.input} />
