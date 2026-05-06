@@ -1,0 +1,14 @@
+{
+  "name": "man-local",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "concurrently \"npm run dev --prefix server\" \"npm run dev --prefix client\"",
+    "build": "npm run build --prefix server && npm run build --prefix client",
+    "start": "concurrently \"npm run start --prefix server\" \"npm run start --prefix client\"",
+    "postinstall": "npm run tldr:download --prefix server"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
