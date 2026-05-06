@@ -1,4 +1,5 @@
-# man-local
+# Linux Command
+a man page that tells what command description and option is!
 
 A local web application to explore Linux man pages and tldr examples with a modern UI.
 
