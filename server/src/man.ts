@@ -70,6 +70,7 @@ export async function getCommandInfo(name: string) {
     synopsis,
     options,
     examples,
+    seeAlso: tldrParsed?.seeAlso ?? [],
     sources
   };
   cache.set(name, result);

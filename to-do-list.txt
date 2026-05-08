@@ -1,0 +1,20 @@
+High Value (practical for a sysadmin tool)
+
+(Remove)Command history — remember recently searched/clicked commands across sessions (localStorage)
+(Remove)Favorites/bookmarks — pin frequently used commands in the sidebar
+(Remove)Copy command from terminal — select text in the xterm terminal and copy it to clipboard
+(Add)Platform filter — filter commands by OS (Linux, macOS, Windows, BSD) since the tldr data has all of them
+
+UX Improvements
+
+(Add)Dark/light theme toggle
+(Remove)Keyboard shortcuts — e.g. Ctrl+K to focus search, Ctrl+``  to open terminal
+(Remove)Resizable terminal modal — drag to resize instead of fixed 80vw/70vh
+(Remove)Multiple terminal tabs — open more than one shell session
+
+Content Improvements
+
+(Add)Search across descriptions — not just command names, but also what they do
+(Remove)Language switcher — the tldr data has 30+ language translations (pages.de, pages.fr, etc.)
+(Add)Related commands — "see also" suggestions at the bottom of each command page
+

@@ -3,6 +3,7 @@ import { join } from 'node:path';
 
 const TLDR_BASE = join(process.cwd(), 'data', 'tldr', 'tldr-main');
 export const tldrIndex: Record<string, string> = {};
+export const tldrPlatformIndex: Record<string, string> = {};
 export const tldrReady = (async () => {
   if (!existsSync(TLDR_BASE)) return;
   for (const entry of readdirSync(TLDR_BASE)) {
@@ -21,6 +22,7 @@ export const tldrReady = (async () => {
         const cmd = file.replace(/\.md$/, '');
         if (!tldrIndex[cmd]) {
           tldrIndex[cmd] = readFileSync(join(sectionDir, file), 'utf8');
+          tldrPlatformIndex[cmd] = section;
         }
       }
     }
@@ -39,6 +41,7 @@ export const tldrReady = (async () => {
           const cmd = file.replace(/\.md$/, '');
           if (!tldrIndex[cmd]) {
             tldrIndex[cmd] = readFileSync(join(sectionDir, file), 'utf8');
+            tldrPlatformIndex[cmd] = section;
           }
         }
       }
@@ -49,13 +52,21 @@ export const tldrReady = (async () => {
 export function parseTldr(md: string) {
   const lines = md.split('\n');
   let meaning = '';
-  const examples = [];
+  const examples: Array<{ cmd: string; description: string }> = [];
+  const seeAlso: string[] = [];
   let desc = '';
   for (let i = 0; i < lines.length; ++i) {
     const line = lines[i];
     if (line.startsWith('# ')) continue;
     if (line.startsWith('>')) {
-      if (!meaning) meaning = line.replace(/^>\s*/, '');
+      const content = line.replace(/^>\s*/, '');
+      if (!meaning) meaning = content;
+      // Parse "See also: `cmd1`, `cmd2`." from any > line
+      const saMatch = content.match(/[Ss]ee also[:\s]+(.+)/);
+      if (saMatch) {
+        const refs = saMatch[1].match(/`([^`]+)`/g);
+        if (refs) seeAlso.push(...refs.map(r => r.replace(/`/g, '')));
+      }
       continue;
     }
     if (line.startsWith('- ')) {
@@ -69,7 +80,7 @@ export function parseTldr(md: string) {
       }
     }
   }
-  return { meaning, examples };
+  return { meaning, examples, seeAlso };
 }
 
 export function parseMan(txt: string) {

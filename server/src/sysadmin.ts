@@ -11,51 +11,51 @@ export interface BestPractice {
 
 export const SYSADMIN_COMMANDS: SysadminCommand[] = [
   // Process Management
-  { command: 'ps', category: 'Processes', description: 'Report process status' },
-  { command: 'top', category: 'Processes', description: 'Display running processes interactively' },
-  { command: 'htop', category: 'Processes', description: 'Interactive process viewer' },
-  { command: 'kill', category: 'Processes', description: 'Terminate a process by PID' },
-  { command: 'killall', category: 'Processes', description: 'Kill processes by name' },
-  { command: 'nice', category: 'Processes', description: 'Run a command with modified scheduling priority' },
+  { command: 'ps',         category: 'Processes',   description: 'Report process status' },
+  { command: 'top',        category: 'Processes',   description: 'Display running processes interactively' },
+  { command: 'htop',       category: 'Processes',   description: 'Interactive process viewer' },
+  { command: 'kill',       category: 'Processes',   description: 'Terminate a process by PID' },
+  { command: 'killall',    category: 'Processes',   description: 'Kill processes by name' },
+  { command: 'nice',       category: 'Processes',   description: 'Run a command with modified scheduling priority' },
   // Disk & Storage
-  { command: 'df', category: 'Disk', description: 'Report disk space usage' },
-  { command: 'du', category: 'Disk', description: 'Estimate file space usage' },
-  { command: 'lsblk', category: 'Disk', description: 'List block devices' },
-  { command: 'fdisk', category: 'Disk', description: 'Manipulate disk partition table' },
-  { command: 'mount', category: 'Disk', description: 'Mount a filesystem' },
-  { command: 'umount', category: 'Disk', description: 'Unmount a filesystem' },
+  { command: 'df',         category: 'Disk',        description: 'Report disk space usage' },
+  { command: 'du',         category: 'Disk',        description: 'Estimate file space usage' },
+  { command: 'lsblk',      category: 'Disk',        description: 'List block devices' },
+  { command: 'fdisk',      category: 'Disk',        description: 'Manipulate disk partition table' },
+  { command: 'mount',      category: 'Disk',        description: 'Mount a filesystem' },
+  { command: 'umount',     category: 'Disk',        description: 'Unmount a filesystem' },
   // Networking
-  { command: 'ip', category: 'Network', description: 'Show/manipulate routing, devices, policy routing' },
-  { command: 'ss', category: 'Network', description: 'Investigate sockets' },
-  { command: 'netstat', category: 'Network', description: 'Network statistics' },
-  { command: 'ping', category: 'Network', description: 'Send ICMP echo requests' },
-  { command: 'curl', category: 'Network', description: 'Transfer data from or to a server' },
-  { command: 'wget', category: 'Network', description: 'Non-interactive network downloader' },
-  { command: 'ssh', category: 'Network', description: 'Secure shell remote login' },
-  { command: 'scp', category: 'Network', description: 'Secure copy over SSH' },
-  { command: 'rsync', category: 'Network', description: 'Remote file sync and transfer' },
+  { command: 'ip',         category: 'Network',     description: 'Show/manipulate routing, devices, policy routing' },
+  { command: 'ss',         category: 'Network',     description: 'Investigate sockets' },
+  { command: 'netstat',    category: 'Network',     description: 'Network statistics' },
+  { command: 'ping',       category: 'Network',     description: 'Send ICMP echo requests' },
+  { command: 'curl',       category: 'Network',     description: 'Transfer data from or to a server' },
+  { command: 'wget',       category: 'Network',     description: 'Non-interactive network downloader' },
+  { command: 'ssh',        category: 'Network',     description: 'Secure shell remote login' },
+  { command: 'scp',        category: 'Network',     description: 'Secure copy over SSH' },
+  { command: 'rsync',      category: 'Network',     description: 'Remote file sync and transfer' },
   // Users & Permissions
-  { command: 'chmod', category: 'Permissions', description: 'Change file permissions' },
-  { command: 'chown', category: 'Permissions', description: 'Change file owner and group' },
-  { command: 'useradd', category: 'Users', description: 'Create a new user' },
-  { command: 'usermod', category: 'Users', description: 'Modify a user account' },
-  { command: 'passwd', category: 'Users', description: 'Change user password' },
-  { command: 'sudo', category: 'Users', description: 'Execute a command as another user' },
+  { command: 'chmod',      category: 'Permissions', description: 'Change file permissions' },
+  { command: 'chown',      category: 'Permissions', description: 'Change file owner and group' },
+  { command: 'useradd',    category: 'Users',       description: 'Create a new user' },
+  { command: 'usermod',    category: 'Users',       description: 'Modify a user account' },
+  { command: 'passwd',     category: 'Users',       description: 'Change user password' },
+  { command: 'sudo',       category: 'Users',       description: 'Execute a command as another user' },
   // Services & Systemd
-  { command: 'systemctl', category: 'Services', description: 'Control systemd services' },
-  { command: 'journalctl', category: 'Services', description: 'Query the systemd journal' },
-  { command: 'cron', category: 'Services', description: 'Daemon to execute scheduled commands' },
-  { command: 'crontab', category: 'Services', description: 'Schedule periodic tasks' },
+  { command: 'systemctl',  category: 'Services',    description: 'Control systemd services' },
+  { command: 'journalctl', category: 'Services',    description: 'Query the systemd journal' },
+  { command: 'crontab',    category: 'Services',    description: 'Schedule periodic tasks' },
+  // Files
+  { command: 'ls',         category: 'Files',       description: 'List directory contents' },
+  { command: 'find',       category: 'Files',       description: 'Search for files in a directory hierarchy' },
+  { command: 'ln',         category: 'Files',       description: 'Make links between files' },
+  // Archives
+  { command: 'tar',        category: 'Archives',    description: 'Archive files' },
   // Logs & Monitoring
-  { command: 'tail', category: 'Logs', description: 'Output the last part of files' },
-  { command: 'grep', category: 'Logs', description: 'Search text using patterns' },
-  { command: 'awk', category: 'Logs', description: 'Pattern scanning and processing' },
-  { command: 'sed', category: 'Logs', description: 'Stream editor for filtering and transforming text' },
-  // Archives & Files
-  { command: 'tar', category: 'Archives', description: 'Archive files' },
-  { command: 'find', category: 'Files', description: 'Search for files in a directory hierarchy' },
-  { command: 'ln', category: 'Files', description: 'Make links between files' },
-  { command: 'rsync', category: 'Files', description: 'Sync files locally or remotely' },
+  { command: 'tail',       category: 'Logs',        description: 'Output the last part of files' },
+  { command: 'grep',       category: 'Logs',        description: 'Search text using patterns' },
+  { command: 'awk',        category: 'Logs',        description: 'Pattern scanning and processing' },
+  { command: 'sed',        category: 'Logs',        description: 'Stream editor for filtering and transforming text' },
 ];
 
 export const BEST_PRACTICES: Record<string, BestPractice[]> = {
@@ -86,6 +86,29 @@ export const BEST_PRACTICES: Record<string, BestPractice[]> = {
     { tip: 'Use `kill -l` to list all available signal names' },
     { tip: 'Prefer `pkill` or `killall` when targeting by process name' },
   ],
+  killall: [
+    { tip: 'Use `-i` to confirm before killing each matching process', example: 'killall -i nginx' },
+    { tip: 'Use `-u` to only kill processes owned by a specific user', example: 'killall -u www-data php-fpm' },
+    { tip: 'Use `-s` to send a specific signal instead of the default SIGTERM', example: 'killall -s HUP nginx' },
+    { tip: 'Verify the process name exactly — killall matches the full process name' },
+  ],
+  nice: [
+    { tip: 'Nice values range from -20 (highest priority) to 19 (lowest)', example: 'nice -n 10 ./backup.sh' },
+    { tip: 'Only root can set negative (high-priority) nice values' },
+    { tip: 'Use `renice` to change priority of an already-running process', example: 'renice -n 5 -p <pid>' },
+    { tip: 'Use `ionice` alongside nice for I/O scheduling priority' },
+  ],
+  fdisk: [
+    { tip: 'Always back up the partition table before making changes', example: 'sfdisk -d /dev/sda > sda-backup.txt' },
+    { tip: 'Use `fdisk -l` to list all disks and partitions without modifying anything', example: 'fdisk -l' },
+    { tip: 'Prefer `parted` or `gdisk` for GPT disks — fdisk is MBR-focused' },
+    { tip: 'Run `partprobe` after changes so the kernel re-reads the partition table', example: 'partprobe /dev/sda' },
+  ],
+  umount: [
+    { tip: 'Use `umount -l` (lazy) if the device is busy — detaches immediately when no longer used', example: 'umount -l /mnt/usb' },
+    { tip: 'Find what is using the mount point before unmounting', example: 'lsof +D /mnt/usb' },
+    { tip: 'Never unmount the root filesystem or any currently-active system mount' },
+  ],
   df: [
     { tip: 'Always use `-h` for human-readable sizes', example: 'df -h' },
     { tip: 'Check inode usage too (full inodes = no space for new files)', example: 'df -i' },
@@ -105,6 +128,18 @@ export const BEST_PRACTICES: Record<string, BestPractice[]> = {
     { tip: 'Use `chown user:group` to set both owner and group at once', example: 'chown www-data:www-data /var/www/html' },
     { tip: 'Use `-R` with care — always double-check the target path first' },
     { tip: 'Verify ownership after changes with `ls -la`', example: 'ls -la /var/www/html' },
+  ],
+  netstat: [
+    { tip: 'Use `ss` instead — netstat is deprecated on modern Linux systems' },
+    { tip: 'Use `-tulpn` to show all listening TCP/UDP ports with process names', example: 'netstat -tulpn' },
+    { tip: 'Use `-r` to display the kernel routing table', example: 'netstat -r' },
+    { tip: 'Filter for established connections only', example: 'netstat -tn | grep ESTABLISHED' },
+  ],
+  wget: [
+    { tip: 'Use `-c` to resume an interrupted download', example: 'wget -c https://example.com/large-file.iso' },
+    { tip: 'Use `-r -np` to mirror a website recursively without going to the parent', example: 'wget -r -np https://example.com/docs/' },
+    { tip: 'Use `-q` for quiet mode in scripts — no progress output', example: 'wget -q -O /dev/null https://example.com/healthcheck' },
+    { tip: 'Set retries and timeout for unreliable connections', example: 'wget --tries=5 --timeout=30 https://example.com/file' },
   ],
   ssh: [
     { tip: 'Use SSH keys instead of passwords — disable password auth in sshd_config' },
@@ -197,6 +232,18 @@ export const BEST_PRACTICES: Record<string, BestPractice[]> = {
     { tip: 'Use `-L` to follow redirects', example: 'curl -L https://example.com' },
     { tip: 'Test an API endpoint with JSON', example: 'curl -X POST -H "Content-Type: application/json" -d \'{"key":"val"}\' https://api/endpoint' },
   ],
+  usermod: [
+    { tip: 'Use `-aG` to append groups without removing existing ones', example: 'usermod -aG docker,sudo username' },
+    { tip: 'Use `-L` to lock an account (disables password login)', example: 'usermod -L username' },
+    { tip: 'Use `-s` to change the default shell', example: 'usermod -s /bin/bash username' },
+    { tip: 'Changes take effect on the next login — active sessions are unaffected' },
+  ],
+  ln: [
+    { tip: 'Use `-s` for symbolic links — hard links cannot span filesystems', example: 'ln -s /path/to/target linkname' },
+    { tip: 'Use `-f` to overwrite an existing link', example: 'ln -sf /new/target linkname' },
+    { tip: 'Verify the link with `ls -la` or `readlink -f`', example: 'readlink -f linkname' },
+    { tip: 'Prefer absolute paths in symlinks for reliability across working directories' },
+  ],
   useradd: [
     { tip: 'Use `-m` to create a home directory', example: 'useradd -m -s /bin/bash newuser' },
     { tip: 'Use `-G` to add user to supplementary groups', example: 'useradd -m -G sudo,docker newuser' },
@@ -217,3 +264,9 @@ export const BEST_PRACTICES: Record<string, BestPractice[]> = {
     { tip: 'Use `lsblk -o NAME,SIZE,TYPE,MOUNTPOINT` for a clean view', example: 'lsblk -o NAME,SIZE,TYPE,MOUNTPOINT' },
   ],
 };
+
+export const GROUPED: Record<string, SysadminCommand[]> = {};
+for (const c of SYSADMIN_COMMANDS) {
+  if (!GROUPED[c.category]) GROUPED[c.category] = [];
+  GROUPED[c.category].push(c);
+}
