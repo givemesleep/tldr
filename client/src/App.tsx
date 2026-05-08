@@ -1,5 +1,6 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useCallback, lazy, Suspense } from 'react';
 import { GROUPED } from './sysadmin';
+const TerminalModal = lazy(() => import('./components/TerminalModal'));
 
 function debounce(fn: (...args: any[]) => void, ms: number) {
   let t: number;
@@ -43,9 +44,11 @@ export default function App() {
   const [error, setError] = useState('');
   const [copied, setCopied] = useState<number | null>(null);
   const [activeCmd, setActiveCmd] = useState('');
+  const [termOpen, setTermOpen] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const fetchCommand = async (q: string) => {
+  // useCallback makes fetchCommand a stable reference (only uses setState setters)
+  const fetchCommand = useCallback(async (q: string) => {
     if (!q.trim()) { setData(null); setError(''); setActiveCmd(''); return; }
     setLoading(true);
     setError('');
@@ -61,9 +64,10 @@ export default function App() {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
-  const doSearch = debounce(fetchCommand, 400);
+  // useRef ensures a single debounce instance survives re-renders
+  const doSearch = useRef(debounce(fetchCommand, 400)).current;
 
   function onInput(e: React.ChangeEvent<HTMLInputElement>) {
     doSearch(e.target.value);
@@ -80,6 +84,9 @@ export default function App() {
     setTimeout(() => setCopied(null), 1500);
   }
 
+  // Stable callback so TerminalModal's useEffect deps never change on re-render
+  const closeTerminal = useCallback(() => setTermOpen(false), []);
+
   const grouped = GROUPED;
 
   return (
@@ -87,11 +94,32 @@ export default function App() {
       {/* Sidebar */}
       <div style={S.sidebar}>
         <div style={S.sideLabel}>Linux Commands</div>
-        <div style={S.sideTitle}>tl;dr</div>g
+        <div style={S.sideTitle}>tl;dr</div>
         <div style={S.sideDesc}>Offline command reference for sysadmins. Search or click a command.</div>
         <div style={{ marginTop: '0.5rem' }}>
           <input ref={inputRef} onChange={onInput} autoFocus placeholder="Search a command…" style={S.input} />
         </div>
+        <button
+          onClick={() => setTermOpen(true)}
+          style={{
+            marginTop: '0.25rem',
+            width: '100%',
+            padding: '0.5rem 0.8rem',
+            borderRadius: 8,
+            border: '1px solid #e94560',
+            background: 'transparent',
+            color: '#e94560',
+            fontSize: 12,
+            fontWeight: 700,
+            cursor: 'pointer',
+            letterSpacing: 1,
+            display: 'flex',
+            alignItems: 'center',
+            gap: 6,
+          }}
+        >
+          <span style={{ fontSize: 14 }}>{'>'}_</span> Launch Terminal
+        </button>
         {loading && <div style={{ color: '#8888aa', fontSize: 12 }}>Loading…</div>}
         {error && <div style={{ color: '#e94560', fontSize: 12 }}>{error}</div>}
 
@@ -196,6 +224,11 @@ export default function App() {
           </div>
         )}
       </div>
+      {termOpen && (
+        <Suspense fallback={null}>
+          <TerminalModal onClose={closeTerminal} />
+        </Suspense>
+      )}
     </div>
   );
 }

@@ -12,11 +12,14 @@
   },
   "dependencies": {
     "@types/cors": "^2.8.19",
+    "@types/ws": "^8.18.1",
     "cors": "^2.8.6",
     "express": "^4.19.2",
     "lru-cache": "^10.1.0",
+    "node-pty": "^1.1.0",
     "ts-node": "^10.9.2",
-    "tsx": "^4.21.0"
+    "tsx": "^4.21.0",
+    "ws": "^8.20.0"
   },
   "devDependencies": {
     "@types/express": "^4.17.21",
