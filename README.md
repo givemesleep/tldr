@@ -56,10 +56,8 @@ Open Termux and run:
 
 ```sh
 pkg update && pkg upgrade -y
-pkg install nodejs git unzip -y
+pkg install nodejs git -y
 ```
-
-> `unzip` is required to extract the tldr pages archive. The app will fail to set up without it.
 
 Verify versions:
 
@@ -117,9 +115,8 @@ Then open `http://<your-android-ip>:5173` on any device connected to the same Wi
 
 | Problem | Fix |
 |---|---|
-| `npm error command failed` / `tldr:download` error | Run `pkg install unzip` then retry `npm install` |
+| `npm error command failed` / `tldr:download` error | Run `git pull` to get the latest fix, then retry `npm install` |
 | `node-pty` build fails | Run `npm install --prefix server --ignore-scripts` |
 | Port already in use | Run `lsof -i :5173` and kill the process |
 | `git` not found | Run `pkg install git` |
-| `unzip` not found | Run `pkg install unzip` |
 | Slow first load | tldr index is being built — wait a few seconds |

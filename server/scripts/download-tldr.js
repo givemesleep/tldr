@@ -1,8 +1,7 @@
-import { spawnSync } from 'node:child_process';
 import { mkdirSync, existsSync, createWriteStream } from 'node:fs';
 import { join } from 'node:path';
 import https from 'https';
-import os from 'node:os';
+import AdmZip from 'adm-zip';
 
 const TLDR_URL = 'https://github.com/tldr-pages/tldr/archive/refs/heads/main.zip';
 const DATA_DIR = join(process.cwd(), 'data', 'tldr');
@@ -26,24 +25,10 @@ function download(url, dest) {
 }
 
 function extract(zip, dest) {
-  if (os.platform() === 'win32') {
-    const result = spawnSync('powershell', [
-      '-Command',
-      `Expand-Archive -Force -Path "${zip}" -DestinationPath "${dest}"`
-    ], { stdio: 'inherit' });
-    if (result.status !== 0) throw new Error('Extraction failed (PowerShell)');
-  } else {
-    // Linux / macOS / Termux (Android)
-    const result = spawnSync('unzip', ['-o', zip, '-d', dest], { stdio: 'inherit' });
-    if (result.status !== 0 || result.error) {
-      throw new Error(
-        'Extraction failed. Make sure `unzip` is installed.\n' +
-        '  Termux (Android): pkg install unzip\n' +
-        '  Debian/Ubuntu:    sudo apt install unzip\n' +
-        '  macOS:            brew install unzip'
-      );
-    }
-  }
+  // Pure JS extraction — works on Windows, Linux, macOS, and Termux (Android)
+  // No system tools (unzip / powershell) required
+  const archive = new AdmZip(zip);
+  archive.extractAllTo(dest, /* overwrite */ true);
 }
 
 if (!existsSync(DATA_DIR)) mkdirSync(DATA_DIR, { recursive: true });

@@ -13,6 +13,7 @@
   "dependencies": {
     "@types/cors": "^2.8.19",
     "@types/ws": "^8.18.1",
+    "adm-zip": "^0.5.17",
     "cors": "^2.8.6",
     "express": "^4.19.2",
     "lru-cache": "^10.1.0",
