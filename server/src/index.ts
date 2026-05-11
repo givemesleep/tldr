@@ -8,9 +8,16 @@ import { SYSADMIN_COMMANDS, BEST_PRACTICES, GROUPED } from './sysadmin.js';
 import cors from 'cors';
 import os from 'os';
 
-// node-pty is a native CJS module — must load via require() in ESM/tsx context
+// node-pty is a native CJS module — must load via require() in ESM/tsx context.
+// Wrapped in try/catch so the server starts even when the native addon is
+// unavailable (e.g. Termux/Android where the binary cannot be compiled).
 const require = createRequire(import.meta.url);
-const pty = require('node-pty') as typeof import('node-pty');
+let pty: typeof import('node-pty') | null = null;
+try {
+  pty = require('node-pty');
+} catch {
+  process.stdout.write('[warn] node-pty not available — terminal feature disabled.\n');
+}
 
 const MAX_SESSIONS = 10;
 let activeSessions = 0;
@@ -100,6 +107,13 @@ const httpServer = createServer(app);
 const wss = new WebSocketServer({ server: httpServer, path: '/terminal' });
 
 wss.on('connection', (ws: WebSocket) => {
+  // Terminal not available on this platform (e.g. Termux/Android)
+  if (!pty) {
+    ws.send('\r\n\x1b[33mTerminal is not available on this device.\x1b[0m\r\n');
+    ws.close();
+    return;
+  }
+
   // Enforce session cap to prevent resource exhaustion
   if (activeSessions >= MAX_SESSIONS) {
     ws.send('\r\n\x1b[31mServer busy: too many active terminal sessions.\x1b[0m\r\n');
@@ -111,7 +125,7 @@ wss.on('connection', (ws: WebSocket) => {
   const isWin = os.platform() === 'win32';
   const shell = isWin ? 'powershell.exe' : (process.env.SHELL || '/bin/bash');
 
-  let ptyProcess: pty.IPty | null = null;
+  let ptyProcess: import('node-pty').IPty | null = null;
   try {
     ptyProcess = pty.spawn(shell, [], {
       name: 'xterm-256color',
