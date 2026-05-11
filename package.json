@@ -6,7 +6,7 @@
     "dev": "concurrently \"npm run dev --prefix server\" \"npm run dev --prefix client\"",
     "build": "npm run build --prefix server && npm run build --prefix client",
     "start": "concurrently \"npm run start --prefix server\" \"npm run start --prefix client\"",
-    "postinstall": "npm run tldr:download --prefix server"
+    "postinstall": "npm install --prefix server --ignore-scripts && npm run tldr:download --prefix server"
   },
   "devDependencies": {
     "concurrently": "^8.2.2"
